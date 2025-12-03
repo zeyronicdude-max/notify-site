@@ -1,1 +1,1 @@
-so guys please subscribe
+https://www.youtube.com/@Splashyplayz
