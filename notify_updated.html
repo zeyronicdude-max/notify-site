@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Splashy Playz Notification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: #202020;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      width: 350px;
+      box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    }
+    h1 {
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      color: white;
+      background: #ff0000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Splashy Playz</h1>
+    <p>Click below and then press <b>ALLOW</b> when your browser asks!<br>
+    You must allow notifications so we can send the message.</p>
+
+    <button onclick="sendNotif()">Send Notification</button>
+
+    <p style="margin-top:15px; color:#aaa; font-size:12px;">
+      Notification will open YouTube when clicked.
+    </p>
+  </div>
+
+  <script>
+    function sendNotif() {
+      if (!('Notification' in window)) {
+        alert('Your browser does not support notifications.');
+        return;
+      }
+
+      if (Notification.permission === 'granted') {
+        showNotif();
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(p => {
+          if (p === 'granted') showNotif();
+        });
+      } else {
+        alert('You blocked notifications. Enable them in browser settings.');
+      }
+    }
+
+    function showNotif() {
+      const n = new Notification("This is Splashy Playz! Like and Subscribe to me on YouTube!", {
+        body: "Click to open the channel!",
+        tag: "splashy-message"
+      });
+
+      n.onclick = () => {
+        window.open("https://youtube.com", "_blank");
+      };
+    }
+  </script>
+</body>
+</html>
